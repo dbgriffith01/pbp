@@ -112,7 +112,9 @@ ExtractPlays = function(url) {
 
     #Get the unique team names:
     teams = unique(sapply(drives, function(x) {x$team}))
-    
+    if(length(teams)==1)
+        teams[2]="Miami"
+        
     #Make sure to label the scores properly:
     costs = list(insertions=2, deletions=0, substitutions=1)
     home_unlike1 = adist(teams[1], scoreCols[1], costs=costs, ignore.case=TRUE)
@@ -131,10 +133,16 @@ ExtractPlays = function(url) {
                 
         #Break the drive into plays:
         nplay = (length(drives[[k]]$pbp)-1) %/% 2
+        if(nplay==0)
+        {
+
+        }
+        else
+        {
         playmeta_regex = paste("(?<down>1st|2nd|3rd|4th|1ST|2ND|3RD|4TH) (and|AND) ",
             "(?<togo>\\d{1,2}|goal|Goal|GOAL) at (?<field>[A-Za-z]{2,4})? ?",
             "(?<yardline>\\d{1,2})", sep='')
-
+    
         for (j in 1:nplay) {
             playmeta = regex(playmeta_regex, drives[[k]]$pbp[2*j],
                 perl=TRUE, fixed=FALSE, ignore.case=TRUE)
@@ -178,6 +186,7 @@ ExtractPlays = function(url) {
             #Add this play to the list
             plays[[length(plays)+1]] = list(poss=off, def=def, down=down,
                 togo=togo, time=time, dist=dist, pbp=pbp, drive=k, playnum=j, drive=k)
+        }
         }
     }
 
