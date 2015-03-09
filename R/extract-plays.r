@@ -7,7 +7,7 @@ ExtractPlays = function(url) {
         "//table[contains(@class,'mod-pbp')]/child::thead/tr/th[1]",
         "//table[contains(@class,'mod-pbp')]/child::thead/tr/td", sep=" | "), xmlValue) 
     pbp<-gsub("Miami (FL) at 3:28", "Miami (FL) at 15:00",pbp)
-    pbp<-gsub("Michigan at 0:00", "Michigan at 0:00",pbp)
+    pbp<-gsub("Michigan at 0:00", "Michigan at 15:00",pbp)
     pbp<-gsub("Virginia Tech at 0:38", "Virginia Tech at 15:00",pbp)
     scoreCols = xpathSApply(tree,
         "//table[contains(@class,'mod-pbp')]/thead/tr[@class='team-color-strip' and count(th)=3]/th[position()>1]",
