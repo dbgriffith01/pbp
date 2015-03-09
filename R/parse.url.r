@@ -47,7 +47,8 @@ parse.url = function(url) {
         play = parse.special(pbp, play)
         play = parse.first.down(pbp, play)
         play = parse.interception(pbp, play)
-        
+        print(scores[k,play$poss])
+        print(scores[k,play$def])
         #Put scores in the table
         play$margin = scores[k, play$poss] - scores[k, play$def]
         play$away = scores[k,1]
